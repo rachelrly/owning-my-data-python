@@ -1,7 +1,7 @@
 import json
 import datetime
 import re
-#import matplotlib.pyplot as plt
+
 
 def normaize_title(str): #replaces spaces and mixed chars with underscores
     formatted = ''
@@ -34,13 +34,17 @@ def print_spotify_activity():
             if formatted_name not in songs:
                 songs[formatted_name] = {"count": 1, "artist": artist_name, "title": song_name}
             else:
-                print(songs[formatted_name])
-                songs[formatted_name]['count'] = songs[formatted_name]['count'] + 1
+                songs[formatted_name]['count'] += 1
                
+    high_listen_songs = dict()
 
     sh0.close()
     sh1.close()
-   # print(songs)
+    for s in songs:
+        if songs[s]['count'] > 10:
+            high_listen_songs[s] = songs[s]
+
+    print(high_listen_songs)
 
 
 print_spotify_activity()
