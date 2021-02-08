@@ -3,11 +3,10 @@ import datetime
 import re
 #import matplotlib.pyplot as plt
 
-def normaize_title(str):
+def normaize_title(str): #replaces spaces and mixed chars with underscores
     formatted = ''
     for l in str:
         if re.match(r'\w', l):
-            print('past if statement')
             formatted += l.lower()
         else: 
             formatted += '_'
@@ -25,25 +24,23 @@ def print_spotify_activity():
 
     for i in data:
        # ts = datetime.datetime.fromtimestamp(i['endTime'])
-        s = i.get('msPlayed')
-        if s > 10000:
-            t = i.get('endTime')
-            a = i.get('artistName')
-            c = i.get('trackName')
-            print(c)
-            if c in songs:
-                print(songs[c])
-                songs[c] = songs[c] + 1
+        ms_played = i.get('msPlayed')
+        if ms_played > 10000: #played for less than a minute
+            time = i.get('endTime')
+            artist_name = i.get('artistName')
+            song_name = i.get('trackName')
+            formatted_name = normaize_title(song_name)
+            
+            if formatted_name not in songs:
+                songs[formatted_name] = {"count": 1, "artist": artist_name, "title": song_name}
             else:
-                #format songs for dict
-                songs[c] = 1
-                # create a sub-dictionary with 
+                print(songs[formatted_name])
+                songs[formatted_name]['count'] = songs[formatted_name]['count'] + 1
+               
 
     sh0.close()
     sh1.close()
-    # for s in songs:
-    #     if s > 5:
-           # print(s)
+   # print(songs)
 
 
-#print_spotify_activity()
+print_spotify_activity()
