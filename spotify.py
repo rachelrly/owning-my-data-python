@@ -23,10 +23,12 @@ def print_spotify_activity():
     songs = dict()
 
     for i in data:
-       # ts = datetime.datetime.fromtimestamp(i['endTime'])
         ms_played = i.get('msPlayed')
         if ms_played > 10000: #played for less than a minute
             time = i.get('endTime')
+            print(time)
+            # dt = datetime.datetime.strptime(time, '%Y-%m-%d %H:%M')
+            # print(dt)
             artist_name = i.get('artistName')
             song_name = i.get('trackName')
             formatted_name = normaize_title(song_name)
@@ -44,7 +46,7 @@ def print_spotify_activity():
         if songs[s]['count'] > 10:
             high_listen_songs[s] = songs[s]
 
-    print(high_listen_songs)
+   # print(high_listen_songs)
 
 
 print_spotify_activity()
