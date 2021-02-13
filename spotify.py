@@ -32,7 +32,7 @@ def get_high_listen_songs(data):
     high_listen_songs = dict()
 
     for s in songs:
-        if songs[s]['count'] > 10:
+        if songs[s]['count'] > 110:
             color = "%06x" % random.randint(0, 0xFFFFFF)
             high_listen_songs[s] = {'color' : f'#{color}'}
 
@@ -54,19 +54,18 @@ def get_individual_listens(high_listen_songs, data): #for high listen songs
                 time = i.get('endTime')
                 dt = datetime.strptime(time, '%Y-%m-%d %H:%M')
 
-                month = dt.month
-                day = dt.day
-                day_decimal = day / 31
-                full_day = month + day_decimal
-                days.append(full_day)
-
                 hour=dt.hour
-                minute=dt.minute
-                minute_decimal = minute / 60
-                full_time = hour + minute_decimal
-                times.append(full_time)
+                minute=dt.minute / 60
+                full_time = hour + minute 
 
-               # print(f'title: {title} date: {full_day} time: {full_time}')
+                month = dt.month 
+                day = dt.day / 31
+                part_day = (full_time / 24) / 31
+                full_day = month + day + part_day
+
+                days.append(full_day)
+                times.append(full_time - 1)
+
     obj = {'days': days, 'times': times, 'colors': colors}  
     return obj
 
@@ -87,8 +86,8 @@ def print_spotify_activity():
     days = lists['days']
     times = lists['times']
     colors = lists['colors']
-    print(colors)
-    frequent_plays_graph(days, times, colors)
+    
+    frequent_plays_graph(days, times, colors) #makes graph
 
     sh1.close() #close files
 
