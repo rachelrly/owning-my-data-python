@@ -2,4 +2,5 @@ venv
 account_activity.json
 used_ip_addresses.json
 .vscode
+__pycache__
 data

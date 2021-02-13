@@ -1,7 +1,8 @@
 import json
 from datetime import datetime
 import re
-from spotify_graph import plays_graph
+from spotify_graph import frequent_plays_graph
+
 
 def normaize_title(str): #replaces spaces and mixed chars with underscores
     formatted = ''
@@ -12,11 +13,6 @@ def normaize_title(str): #replaces spaces and mixed chars with underscores
             formatted += '_'
     return formatted
 
-    # get the name of high count songs
-    # loop through data again and filter out with dates
-
-
-
 
 def get_high_listen_songs(data): 
     #returns a set of titles where listens > 10
@@ -24,10 +20,6 @@ def get_high_listen_songs(data):
     for i in data:
         ms_played = i.get('msPlayed')
         if ms_played > 10000: #played for less than a minute
-            # time = i.get('endTime')
-            # dt = datetime.strptime(time, '%Y-%m-%d %H:%M')
-            # print(dt)
-            # artist_name = i.get('artistName')
             song_name = i.get('trackName')
             formatted_name = normaize_title(song_name)
             
@@ -45,6 +37,34 @@ def get_high_listen_songs(data):
     return high_listen_songs
 
 
+def get_individual_listens(high_listen_songs, data): #for high listen songs
+    days = list()
+    times = list()
+    for i in data:
+        title = i.get('trackName')
+        if title in high_listen_songs: 
+            ms_played = i.get('msPlayed')
+            if ms_played > 10000:
+                time = i.get('endTime')
+                dt = datetime.strptime(time, '%Y-%m-%d %H:%M')
+
+                month = dt.month
+                day = dt.day
+                day_decimal = day / 31
+                full_day = month + day_decimal
+                days.append(full_day)
+
+                hour=dt.hour
+                minute=dt.minute
+                minute_decimal = minute / 60
+                full_time = hour + minute_decimal
+                times.append(full_time)
+
+               # print(f'title: {title} date: {full_day} time: {full_time}')
+    obj = {'days': days, 'times': times}  
+    return obj
+
+
 
 
 
@@ -57,8 +77,14 @@ def print_spotify_activity():
     data = json.load(sh0) + json.load(sh1)
 
     high_listen_titles = get_high_listen_songs(data) #set of titles
+    lists = get_individual_listens(high_listen_titles, data) #gets individual dates for high play songs
 
-    sh0.close()
+    days = lists['days']
+    times = lists['times']
+
+    frequent_plays_graph(days, times)
+
+    sh0.close() #close files
     sh1.close()
 
 
@@ -66,4 +92,3 @@ def print_spotify_activity():
 
 
 print_spotify_activity()
-#plays_graph()
