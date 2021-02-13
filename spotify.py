@@ -1,7 +1,7 @@
 import json
 import datetime
 import re
-
+from spotify_graph import plays_graph
 
 def normaize_title(str): #replaces spaces and mixed chars with underscores
     formatted = ''
