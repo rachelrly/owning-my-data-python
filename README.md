@@ -10,7 +10,6 @@ This file runs a function that parses the json data from `StreamingHistory1.json
 
 The time information for each of these plays is collected and visualized with Matplotlib in `spotify_graph.py`.
 
-Every dot represents a "play", and each song is randomly assigned a color. 
-
+Each song is randomly assigned a color, and each dot represents a play. 
 
 ### facebook.py
