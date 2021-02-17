@@ -2,6 +2,10 @@
 
 Working with the user data from Facebook, Google, and Spotify.
 
+## Images
+
+![](no-lables.png)
+
 ## Codebase
 
 ### spotify.py
