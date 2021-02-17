@@ -1,10 +1,11 @@
 # Owning my Data
 
-Working with the user data from Facebook, Google, and Spotify.
+Python functions to analyze user data from Facebook, Google, and Spotify.
 
 ## Images
 
 ![](no-lables.png)
+This graph displays the plays of every song that was played more than 100 times between Jan 2021 and Feb 2021.
 
 ## Codebase
 
