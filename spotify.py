@@ -1,5 +1,5 @@
 import json
-from spotify_graph import graph_song_plays_by_date
+from spotify_graph import graph_song_plays_by_date, graph_song_plays_with_subplot
 from spotify_helpers import get_high_listen_songs
 from spotify_helpers import get_data_for_all_high_listens
 from spotify_helpers import get_data_single_high_play_song
@@ -26,8 +26,9 @@ def handle_spotify_activity():
     times = lists['times']
     colors = lists['colors']
     
-    graph_song_plays_by_date(days, times, colors) 
-   # get_data_single_high_play_song(high_listen_titles)
+    graph_song_plays_with_subplot(days, times, colors)
+    # graph_song_plays_by_date(days, times, colors) 
+    # get_data_single_high_play_song(high_listen_titles)
 
 
 

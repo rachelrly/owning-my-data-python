@@ -13,6 +13,19 @@ def graph_song_plays_by_date(dates, times, colors):
     plt.show()
 
 
+def graph_song_plays_with_subplot(dates, times, colors):
+    y = np.array(dates)
+    x = np.array(times)
+    colors = np.array(colors)
+    fig = plt.figure()
+    ax = fig.add_subplot()
+    ax.scatter(x, y)
+    # ax.plot(x, y)
+    #ax.set_xlim(1, 25)
+    ax.set_ylim(dates[0], dates[-1])
+    plt.show()
+
+
 def graph_song_plays_by_song(dates, plays, color):
     x = np.array(dates)
 
