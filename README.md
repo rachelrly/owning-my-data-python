@@ -4,8 +4,12 @@ Python functions to analyze user data from Facebook, Google, and Spotify.
 
 ## Images
 
-![](no-lables.png)
+![](with-lables.png)
 This graph displays the plays of every song that was played more than 100 times between Jan 2021 and Feb 2021.
+
+![](other-color.png)
+
+The colors are randomly generated for each individual song. 
 
 ## Codebase
 

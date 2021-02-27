@@ -17,12 +17,20 @@ def graph_song_plays_with_subplot(dates, times, colors):
     y = np.array(dates)
     x = np.array(times)
     colors = np.array(colors)
-    fig = plt.figure()
-    ax = fig.add_subplot()
-    ax.scatter(x, y)
-    # ax.plot(x, y)
-    #ax.set_xlim(1, 25)
+
+    fig, ax = plt.subplots()
+
+    ax.scatter(x, y, c=colors, alpha=0.5, s=50)
+
+    ax.set_xlim(x[0], x[-1])
     ax.set_ylim(dates[0], dates[-1])
+
+    date_form = DateFormatter('%h %d')
+    ax.get_xaxis().set_major_formatter(date_form) 
+
+    ax.set_xlabel('Date played')
+    ax.set_ylabel('Time played')
+
     plt.show()
 
 
